@@ -1,0 +1,42 @@
+<!doctype html>
+
+<%@ page import = "java.io.*, java.util.*, java.sql.*" %>
+<%@ page import = "javax.servlet.http.*, javax.servlet.*" %>
+
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+
+<html>
+    <head>
+        <title>Bad prctice</title>
+    </head>
+    <body>
+        <sql:setDataSource 
+           var = "conector" 
+           driver = "com.mysql.cj.jdbc.Driver"
+           url = "jdbc:mysql://192.168.100.2:5555/prueba" 
+           user = "root" 
+           password = "gustavo" />
+
+        <c:out value="${conector}"/>
+
+        <sql:query dataSource = "${conector}" var="result" sql="select * from persona" />
+
+        <table border="1" width="100%">
+            <tr>
+                <th>ID</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Age</th>
+            </tr>
+            <c:forEach var = "row" items = "${result.rows}" >
+                <tr>
+                    <td><c:out value = "${row.id}" /></td>
+                    <td><c:out value = "${row.first}" /></td>
+                    <td><c:out value = "${row.last}" /></td>
+                    <td><c:out value = "${row.age}" /></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+# Based on: https://cntnr.io/setting-up-wordpress-with-docker-262571249d50
+
+version: '2'
+services:
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:4.6
+    restart: always
+    volumes:
+      - ./wp-content:/var/www/html/wp-content 
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: p4ssw0rd!
+    ports:
+      - 9080:80
+      - 9443:443
+    networks:
+      - back
+  db:
+    image: mysql:5.7
+    restart: always
+    volumes:
+       - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 18080:80
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: p4ssw0rd!
+    networks:
+      - back
+networks:
+  back:
+volumes:
+  db_data:
+
