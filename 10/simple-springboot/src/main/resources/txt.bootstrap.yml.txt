@@ -1,0 +1,25 @@
+spring:
+  cloud:
+    config:
+      enabled: true
+      uri: ${SPC:http://localhost:7777}
+      name: petstore-back, hikari, ValidationMessages, passay, router
+      label: master
+      allow-override: true
+      failFast: true
+      retry:
+        initialInterval: 6000
+        multiplier: 1.5
+        maxInterval: 30000
+  profiles:
+    active: ${AMBIENTE:gus}
+
+# Probar primero el servidor de configuración asi:
+# https://config.qbits.mx/application/default
+# it comes from:
+
+# https://github.com/qbits-mx/configuration-tienda
+
+# IMPORTANT !!!!! check connection at: 
+# http://localhost:8001/petstore-back-prod/default
+# (if uri: localhost:8001)
