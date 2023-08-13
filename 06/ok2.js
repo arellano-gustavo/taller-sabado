@@ -1,3 +1,4 @@
+function conecta() {
             var tradesCount        = 0,
                 ordersCount        = 0,
                 trades_output      = document.getElementById('trades-output'),
@@ -11,12 +12,16 @@
                 websocket.send(JSON.stringify({ action: 'subscribe', book: 'eth_usd', type: 'orders' }));
                 console.log("inicio " + tiempo());
             };
-            websocket.onclose = function() {
+            websocket.onclose = function(e) {
             	console.log("fin " + tiempo());
+                console.log('Socket is closed. Reconnect will be attempted in 1 second.', e.reason);
+                setTimeout(function() {
+                  conecta();
+                }, 3000);            	
             };
 
             websocket.onmessage = function(message){
-                console.log("tick: " + tiempo());
+                //console.log("tick: " + tiempo());
                 var data = JSON.parse(message.data);
 
                 /*if (data.type != 'ka')
@@ -73,10 +78,14 @@
                     }
                 }
             };
-            
-            function tiempo() {
-                var current = new Date();
-                return current.toLocaleTimeString();
-            }
+        
+}
+
+conecta();
+
+function tiempo() {
+    var current = new Date();
+    return current.toLocaleTimeString();
+}
 
 

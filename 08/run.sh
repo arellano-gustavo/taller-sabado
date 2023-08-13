@@ -1,4 +1,4 @@
-docker stop taller-nodejs-example
+# docker stop taller-nodejs-example
 
 docker run \
 --rm -it \
