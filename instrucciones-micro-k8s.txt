@@ -2,7 +2,9 @@ sudo apt update
 sudo snap install microk8s --classic
 mkdir ~/.kube
 sudo usermod -a -G microk8s ubuntu
-# download the bundle  files.tar.gz
+
+# download and extract the bundle  "files.tar.gz"
+wget https://raw.githubusercontent.com/arellano-gustavo/taller-sabado/main/files.tar.gz
 tar xzvf files.tar.gz
 exit
 
