@@ -20,7 +20,7 @@ microk8s enable ingress
 microk8s.kubectl create secret docker-registry mygithubregistrykey \
   --docker-server=ghcr.io \
   --docker-username=arellano-gustavo \
-  --docker-password=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 \
+  --docker-password=ghp_poner_el_correcto \
   --docker-email=arellano.gustavo@gmail.com
   
   
