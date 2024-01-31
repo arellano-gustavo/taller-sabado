@@ -1,6 +1,7 @@
 sudo apt update
 sudo snap install microk8s --classic
 mkdir ~/.kube
+chmod -R 777 ~/.kube 
 sudo usermod -a -G microk8s ubuntu
 
 # download and extract the bundle  "files.tar.gz"
